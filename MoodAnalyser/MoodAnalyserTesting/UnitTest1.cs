@@ -8,31 +8,50 @@ namespace MoodAnalyserTesting
         MoodAnlyser moodAnlyser;
         [SetUp]
         public void Setup()
-        {   //arrange
-            moodAnlyser = new MoodAnlyser();
+        {
+            string result = "";
+            //arrange
+            moodAnlyser = new MoodAnlyser(result);
         }
-        //summary//
+        //summary//Refactor
         // TC-1.1 Given "I am in Sad mood" message should return SAD//
 
         [Test]
         public void Give_Message_when_ShouldReturnSad()
-        {  //act
-            string message = moodAnlyser.Analysemood("I am in SAD mood");
+        {
+            moodAnlyser = new MoodAnlyser("I am in a SAD mood");
+            //act
+            string message = moodAnlyser.Analysemood();
 
             //assert
             Assert.AreEqual("SAD", message);
         }
-
-
-        ///</summary>
+        //summary//Refactor
         /// TC-1.2 Given "I am in Any mood" message should return HAPPY//
         [Test]
-        public void Give_Message_When_SouldReturnHappy()
+        public void Give_Message_When_ShouldReturnHappy()
         {
+            moodAnlyser = new MoodAnlyser("I am in ANY mood");
             //act
-            string message = moodAnlyser.Analysemood("I am in ANY mood");
+            string message = moodAnlyser.Analysemood();
             //assert
             Assert.AreEqual("HAPPY", message);
         }
+
+        //summary//Handling null exception//
+        //TC-2.1 given null mood should return Happy//
+        [Test]
+        public void Give_Message_WhenNull_ShouldReturnHappy()
+        {
+            moodAnlyser = new MoodAnlyser();
+            //act
+            string message = moodAnlyser.Analysemood();
+            //assert
+            Assert.AreEqual("HAPPY", message);
+        }
+
+
+
+
     }
 }
