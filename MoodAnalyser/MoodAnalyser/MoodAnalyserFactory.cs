@@ -1,4 +1,5 @@
 ﻿using MoodAnalyserSpace;
+using MoodAnalysers;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -13,7 +14,7 @@ namespace MoodAnalysers
         {
             string pattern = @"." + constructorName + "$";
             Match result = Regex.Match(className, pattern);
-            //computaion
+
             if (result.Success)
             {
                 try
@@ -30,6 +31,27 @@ namespace MoodAnalysers
             else
             {
                 throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchConstructor, "Constructor not found");
+            }
+        }
+        public static object CreateMoodAnalyserParameterisedConstructor(string className, string constructorName)
+        {
+            Type type = typeof(MoodAnalyser);
+            if (type.FullName.Equals(className) || type.Name.Equals(className))
+            {
+                if (type.Name.Equals(constructorName))
+                {
+                    ConstructorInfo constructorInfo = type.GetConstructor(new[] { typeof(string) });
+                    object obj = constructorInfo.Invoke(new[] { "Happy" });
+                    return obj;
+                }
+                else
+                {
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchConstructor, "Constructor not found");
+                }
+            }
+            else
+            {
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchClass, "Class not found");
             }
         }
     }
