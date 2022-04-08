@@ -25,12 +25,12 @@ namespace MoodAnalysers
                 }
                 catch (ArgumentNullException)
                 {
-                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchClass, "Class not found");
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Class, "Class not found");
                 }
             }
             else
             {
-                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchConstructor, "Constructor not found");
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor not found");
             }
         }
         public static object CreateMoodAnalyserParameterisedConstructor(string className, string constructorName)
@@ -46,12 +46,28 @@ namespace MoodAnalysers
                 }
                 else
                 {
-                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchConstructor, "Constructor not found");
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor not found");
                 }
             }
             else
             {
-                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NoSuchClass, "Class not found");
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Class, "Class not found");
+            }
+        }
+        public static string InvokeAnalyseMood(string message, string methodName)
+        {
+            try
+            {
+                Type type = Type.GetType("MoodAnalyserSpace.MoodAnalyser");
+                object moodAnalyse = CreateMoodAnalyserParameterisedConstructor(
+                    "MoodAnalyserSpace.MoodAnalyser", "MoodAnalyser");
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                object moodInvoke = methodInfo.Invoke(moodAnalyse, null); 
+                return (string)moodInvoke;
+            }
+            catch (Exception)
+            {
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor not found");
             }
         }
     }

@@ -9,11 +9,11 @@ namespace MoodAnalysers
         ExceptionType type;
         public enum ExceptionType
         {
-            EmptyMood,
-            NullMood,
-            NoSuchClass,
-            NoSuchConstructor,
-            NoSuchField,
+            Empty_Mood,
+            Null_Mood,
+            No_Such_Class,
+            No_Such_Constructor,
+            No_Such_Field,
         }
 
         public MoodAnalyserCustomException(ExceptionType type, string message) : base(message)
