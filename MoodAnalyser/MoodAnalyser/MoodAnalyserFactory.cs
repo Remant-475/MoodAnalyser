@@ -46,12 +46,12 @@ namespace MoodAnalysers
                 }
                 else
                 {
-                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor not found");
+                    throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor Not found");
                 }
             }
             else
             {
-                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Class, "Class not found");
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Class, "Class Not found");
             }
         }
         public static string InvokeAnalyseMood(string message, string methodName)
