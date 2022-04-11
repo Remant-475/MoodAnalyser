@@ -10,6 +10,7 @@ namespace MoodAnalysers
 {
     public class MoodAnalyserFactory
     {
+        
         public static object CreateMoodAnalyser(string className, string constructorName)
         {
             string pattern = @"." + constructorName + "$";
@@ -59,16 +60,18 @@ namespace MoodAnalysers
             try
             {
                 Type type = Type.GetType("MoodAnalyserSpace.MoodAnalyser");
-                object moodAnalyse = CreateMoodAnalyserParameterisedConstructor(
+                object MoodAnalyse = CreateMoodAnalyserParameterisedConstructor(
                     "MoodAnalyserSpace.MoodAnalyser", "MoodAnalyser");
                 MethodInfo methodInfo = type.GetMethod(methodName);
-                object moodInvoke = methodInfo.Invoke(moodAnalyse, null); 
-                return (string)moodInvoke;
+                object mood = methodInfo.Invoke(MoodAnalyse, null);
+                return mood.ToString();
             }
             catch (Exception)
             {
                 throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.No_Such_Constructor, "Constructor not found");
             }
         }
+
+       
     }
 }
